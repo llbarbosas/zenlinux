@@ -24,3 +24,5 @@ Arch is great, but I want to create a bootable _[maybe persistent?]_ iso of my o
     - powerlevel10k
   - nerd-fonts-jetbrains-mono
   - ttf-jetbrains-mono
+  - termite
+  - nord-theme
