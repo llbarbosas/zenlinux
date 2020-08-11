@@ -6,6 +6,7 @@ Arch is great, but I want to create a bootable _[maybe persistent?]_ iso of my o
 ### TODO
 
 - [ ] Arch essentials
+  - git
   - yay
   - netctl
 - [ ] Login
