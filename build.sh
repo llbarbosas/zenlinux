@@ -33,7 +33,7 @@ DIR="$(cd "$(dirname $0)" && pwd)"
 PKGS_DIR="$DIR/packages"
 PKGS="$(ls $PKGS_DIR)"
 LOCALREPO_DIR="$DIR/localrepo"
-
+BUILD_SCRIPT="$DIR/releng/build.sh"
 
 # Releng files backup
 
@@ -67,7 +67,8 @@ function build_packages() {
 	for pkg in $PKGS; do
 		echo "[*] Building $pkg"
 		cd $PKGS_DIR/$pkg 
-		makepkg -sC > /dev/null 2>&1
+		makepkg -sC --noconfirm # > /dev/null 2>&1
+
 	done
 }
 
@@ -87,12 +88,23 @@ function mk_localrepo() {
 
 	repo-add $LOCALREPO_DIR/localrepo.db.tar.gz $pkgs_files > /dev/null 2>&1
 
+	echo "[*] Adding localrepo to releng/pacman.conf"
+	
+	echo "#[localrepo]" >> $PACMANCONF
+	echo "SigLevel = Optional TrustAll" >> $PACMANCONF
+	echo "Server = file://$LOCALREPO_DIR"
 }
 
+function build_iso() {
+	echo "[*] Using releng/build.sh to build the iso"
 
+	sudo $BUILD_SCRIPT -N "zenlinux" -L "ZEN_202008" -P "Lucas Barbosa <http://llbarbosas.dev>" -A "zenlnux LiveCD"
+}
 
 trap cleanup SIGINT
 
 build_packages
 mk_localrepo
-cleanup
+build_iso
+
+# cleanup

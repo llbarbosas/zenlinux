@@ -1,3 +1,9 @@
 [submodule "packages/yay"]
 	path = packages/yay
 	url = https://aur.archlinux.org/yay.git
+[submodule "packages/nerd-fonts-jetbrains-mono"]
+	path = packages/nerd-fonts-jetbrains-mono
+	url = https://aur.archlinux.org/nerd-fonts-jetbrains-mono.git
+[submodule "packages/polybar"]
+	path = packages/polybar
+	url = https://aur.archlinux.org/polybar.git
